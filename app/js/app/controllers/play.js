@@ -20,10 +20,10 @@ angular.module('PoneyLand.controllers').
                     var speed = $(fx.elem).attr('speed');
                     var sens = $(fx.elem).attr('sens');
                     var r = Math.random();
-                    var width = $(".container").width();
+                    var width = $("body").width()-($("body").width() - $('.container').width());
                     if(speed == undefined){
                         speed = ((Math.random()+1)*10)/(Math.random()*10);
-                        console.log(speed);
+                        //console.log(speed);
                     }else{
                         speed = parseInt(speed);
                     };  
@@ -68,7 +68,7 @@ angular.module('PoneyLand.controllers').
         };
         animate_cutie();
         scope.cloud = 0;
-        scope.rawCloudPerSecond = 1;
+        scope.rawCloudPerSecond = 0;
         scope.consoCloudPerSecond = 0;
         //Colors declarations
         scope.colors = [{color:'red', workers:0, factory:0, modificateur:1, quantity:0},
