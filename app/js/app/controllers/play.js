@@ -6,26 +6,31 @@ angular.module('PoneyLand.controllers').
         $("#rainbowtop").slideUp("slow", function() {
             $('body').css("background-image", "url('img/back.png')");
         });
+        scope.lstcloud = [];
         var addCloud = function() {
-
+            scope.lstcloud.push("0");
+            $('#garbageCloud').append("<img class='rainbowcutiemark' ng-click='addCloud()' style='position: absolute;height: 80px; transform-origin: 50% 50%; cursor: pointer;' src='img/cutiemark-min.png' />");
         };
         var delCloud = function() {
-            $(".rainbowcutiemark:first").remove();
-            scope.addCloud();
+            if ($(".rainbowcutiemark").length > 0) {
+                $(".rainbowcutiemark:first").remove();
+                scope.addCloud();
+            }
         };
         var generate_cutie = function() {
-            
-            
-            if (scope.meteopegase != undefined) {
-                var cpt_peg_cloud = 10 * scope.meteopegase;
-                for (var i = 0; i < cpt_peg_cloud; i++) {
-                    delCloud();
-                }
+            var cpt_addCloud = scope.getCloudPopingValue();
+            for (var i = 0; i < cpt_addCloud; i++) {
+                addCloud();
+            }
+
+            var cpt_peg_cloud = 10 * scope.meteopegase;
+            for (var i = 0; i < cpt_peg_cloud; i++) {
+                delCloud();
             }
 
             timeout(function() {
                 generate_cutie();
-            }, 1000, true);
+            }, 10000, true);
         };
         var animate_cutie = function() {
             $(".rainbowcutiemark").animate({
@@ -46,7 +51,7 @@ angular.module('PoneyLand.controllers').
                     //Init & Fix Speed
                     if (speed == undefined) {
                         delta_x = Math.random() * 20;
-                        speed = ((Math.random() + 1) * 9) / 5;
+                        speed = ((Math.random() + 1) * 9) / 7;
                         //console.log(speed);
                     } else {
                         delta_x = parseInt(delta_x);
@@ -103,11 +108,11 @@ angular.module('PoneyLand.controllers').
             }, 360, true);
         };
         animate_cutie();
-        generate_cutie();
 
-        $(".rainbowcutiemark").click(function(e) {
-            $(e.target).remove();
-        });
+
+//        $("#garbageCloud").on("click", ".rainbowcutiemark", function(e) {
+//            $(e.target).remove();
+//        });
 
 
         scope.cloud = 0;
@@ -132,27 +137,27 @@ angular.module('PoneyLand.controllers').
             }
             //Calcul final du nombre de cloud
             scope.cloud += parseInt(cloudPerSecond);
-            console.log(scope.cloud);
+            //console.log(scope.cloud);
             //calcul RainBow
             var maxRainbowTheoricalCookable = scope.rainbowCooker < scope.rainbowFactoryNbr / 10.0 ? scope.rainbowCooker : scope.rainbowFactoryNbr * 10;
-            console.log('theorical cookable :' + maxRainbowTheoricalCookable);
+            //console.log('theorical cookable :' + maxRainbowTheoricalCookable);
             var maxColorValue = 0;
             for (var color in scope.colors) {
                 if (scope.colors[color].quantity > maxColorValue)
                     maxColorValue = scope.colors[color].quantity;
             }
-            console.log('max color value :' + maxColorValue);
+            //console.log('max color value :' + maxColorValue);
             var maxEffectiveRainbowCookable = Math.floor(maxColorValue / 100);
-            console.log('max effective cookable :' + maxEffectiveRainbowCookable);
+            //console.log('max effective cookable :' + maxEffectiveRainbowCookable);
             var rainbowToCook = maxEffectiveRainbowCookable > maxRainbowTheoricalCookable ? maxRainbowTheoricalCookable : maxEffectiveRainbowCookable;
-            console.log('cooking : ' + rainbowToCook);
+            //console.log('cooking : ' + rainbowToCook);
             //balance materials
             for (var color in scope.colors) {
                 scope.colors[color].quantity -= rainbowToCook * 100;
-                console.log('new color value:' + scope.colors[color].quantity);
+                //console.log('new color value:' + scope.colors[color].quantity);
             }
             scope.rainbow += rainbowToCook;
-            console.log('RAINBOW' + scope.rainbow);
+            //console.log('RAINBOW' + scope.rainbow);
 
             //console.log('nbrCloud :'+scope.cloud);
             var that = this;
@@ -178,14 +183,16 @@ angular.module('PoneyLand.controllers').
             _modulRateCloudPerSecond(10 * scope.modificateurMeteo);
         };
 
-        scope.addCloud = function() {
+        scope.addCloud = function($event) {
+            $($event.target).remove();
+            scope.lstcloud.pop();
             scope.cloud++;
         }
-        
-        scope.getCloudPopingValue = function(){
+
+        scope.getCloudPopingValue = function() {
             return 2;
         }
-        
+
         //Colors declarations
         scope.colors = [{color: 'red', workers: 0, factory: 0, modificateur: 1, quantity: 0},
             {color: 'orange', workers: 0, factory: 0, modificateur: 1, quantity: 0},
@@ -277,4 +284,6 @@ angular.module('PoneyLand.controllers').
             }
 
         };
+
+        generate_cutie();
     }]);

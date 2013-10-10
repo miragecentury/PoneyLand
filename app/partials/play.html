@@ -1,10 +1,7 @@
 <div class="col-md-12">
     <div class="row"  style='height: 200px;'>
-        <div class="col-md-12" style='padding-top: 50px;'>
-            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
-            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
-            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
-            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+        <div id='garbageCloud' class="col-md-12" style='padding-top: 50px;-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;'>
+            <img ng-repeat='cl in lstcloud' class="rainbowcutiemark" ng-click='addCloud($event)' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
         </div>
     </div>
     <div class="row">
@@ -13,7 +10,7 @@
                 <img src='img/pony.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-warning' style='font-size: 16px;'>{{meteoPegaze}}</span>
+                <span class='label label-warning' style='font-size: 16px;'>{{pegazeMeteo}}</span>
             </div>
             <div class='row' style='margin-top:5px;'>
                 <button ng-click='addMeteoPegaze()' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
