@@ -80,16 +80,16 @@ angular.module('PoneyLand.controllers').
         scope._generateCloud = function(){
             //Definition de la genration de nuage seche
             var cloudPerSecond = scope.rawCloudPerSecond - scope.consoCloudPerSecond;
-            console.log('CloudPerSecond : '+cloudPerSecond);
+            //console.log('CloudPerSecond : '+cloudPerSecond);
             for (var index in scope.colors){
                 var color = scope.colors[index];
                 color.quantity += parseInt(color.workers*color.factory*color.modificateur);
-                console.log('Color : '+ color.color);
-                console.log(color);
+                //console.log('Color : '+ color.color);
+                //console.log(color);
             }   
             //Calcul final du nombre de cloud
             scope.cloud+=parseInt(cloudPerSecond);
-            console.log('nbrCloud :'+scope.cloud);
+            //console.log('nbrCloud :'+scope.cloud);
             var that = this;
             timeout(function(){
                 scope._generateCloud();
