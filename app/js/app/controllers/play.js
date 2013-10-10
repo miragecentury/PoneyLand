@@ -6,6 +6,27 @@ angular.module('PoneyLand.controllers').
         $("#rainbowtop").slideUp("slow", function() {
             $('body').css("background-image", "url('img/back.png')");
         });
+        var addCloud = function() {
+
+        };
+        var delCloud = function() {
+            $(".rainbowcutiemark:first").remove();
+            scope.addCloud();
+        };
+        var generate_cutie = function() {
+            
+            
+            if (scope.meteopegase != undefined) {
+                var cpt_peg_cloud = 10 * scope.meteopegase;
+                for (var i = 0; i < cpt_peg_cloud; i++) {
+                    delCloud();
+                }
+            }
+
+            timeout(function() {
+                generate_cutie();
+            }, 1000, true);
+        };
         var animate_cutie = function() {
             $(".rainbowcutiemark").animate({
                 transform: "rotate(5deg)",
@@ -18,20 +39,21 @@ angular.module('PoneyLand.controllers').
                     var speed = $(fx.elem).attr('speed');
                     var sens = $(fx.elem).attr('sens');
                     var r = Math.random();
-                    var width = $("body").width()-($("body").width() - $('.container').width());
+                    var width = $("body").width() - ($("body").width() - $('.container').width());
                     var min_x = $(fx.elem).attr('min_x');
                     var max_x = $(fx.elem).attr('max_x');
                     var delta_x = $(fx.elem).attr('delta_x');
                     //Init & Fix Speed
-                    if(speed == undefined){
-                        delta_x = Math.random()*20;
-                        speed = ((Math.random()+1)*9)/5;
+                    if (speed == undefined) {
+                        delta_x = Math.random() * 20;
+                        speed = ((Math.random() + 1) * 9) / 5;
                         //console.log(speed);
-                    }else{
+                    } else {
                         delta_x = parseInt(delta_x);
                         speed = parseInt(speed);
-                    };  
-                    
+                    }
+                    ;
+
                     //Init & Fix x
                     if (x == undefined) {
                         x = 0;
@@ -44,33 +66,33 @@ angular.module('PoneyLand.controllers').
                     } else {
                         sens = false;
                     }
-                    
+
                     //Changement de ses
                     if (x > width)
                     {
                         sens = false;
                     }
-                    if(x<0){
+                    if (x < 0) {
                         sens = true;
                         x = 0;
                     }
-                    
+
                     //Déplacement sur X
                     if (sens) {
                         x = x + speed;
-                    }else{
+                    } else {
                         x = x - speed;
                     }
                     //Déplacement sur Y
-                    y = Math.cos((x+delta_x) / 30) * 50;
-                    
+                    y = Math.cos((x + delta_x) / 30) * 50;
+
                     it = 0;
-                    $(fx.elem).attr('delta_x',delta_x)
-                    $(fx.elem).attr('speed',speed);
+                    $(fx.elem).attr('delta_x', delta_x)
+                    $(fx.elem).attr('speed', speed);
                     $(fx.elem).attr('itera', it);
                     $(fx.elem).attr('x', x);
                     $(fx.elem).attr('y', y);
-                    $(fx.elem).attr('sens',sens);
+                    $(fx.elem).attr('sens', sens);
                     $(fx.elem).css("transform", "rotate(" + it + "deg) translate(" + x + "px," + y + "px)");
                     $(fx.elem).css("-webkit-transform", "rotate(" + it + "deg) translate(" + x + "px," + y + "px)");
                     $(fx.elem).css("-moz-transform", "rotate(" + it + "deg) translate(" + x + "px," + y + "px)");
@@ -81,124 +103,126 @@ angular.module('PoneyLand.controllers').
             }, 360, true);
         };
         animate_cutie();
-        $(".rainbowcutiemark").click(function(e){
+        generate_cutie();
+
+        $(".rainbowcutiemark").click(function(e) {
             $(e.target).remove();
         });
-        
-        
+
+
         scope.cloud = 0;
         scope.rawCloudPerSecond = 0;
         scope.consoCloudPerSecond = 0;
         scope.pegazeMeteo = 0;
-        scope.modificateurMeteo = 1;  
+        scope.modificateurMeteo = 1;
         scope.rainbow = 0;
         scope.rainbowFactoryNbr = 0;
         scope.rainbowCooker = 0;
-        
+
         //Cloud Générator
-        scope._generateCloud = function(){
+        scope._generateCloud = function() {
             //Definition de la genration de nuage seche
             var cloudPerSecond = scope.rawCloudPerSecond - scope.consoCloudPerSecond;
             //console.log('CloudPerSecond : '+cloudPerSecond);
-            for (var index in scope.colors){
+            for (var index in scope.colors) {
                 var color = scope.colors[index];
-                color.quantity += parseInt(color.workers*color.factory*color.modificateur);
+                color.quantity += parseInt(color.workers * color.factory * color.modificateur);
                 //console.log('Color : '+ color.color);
                 //console.log(color);
-            }   
+            }
             //Calcul final du nombre de cloud
-            scope.cloud+=parseInt(cloudPerSecond);
+            scope.cloud += parseInt(cloudPerSecond);
             console.log(scope.cloud);
             //calcul RainBow
-            var maxRainbowTheoricalCookable = scope.rainbowCooker < scope.rainbowFactoryNbr/10.0 ? scope.rainbowCooker : scope.rainbowFactoryNbr*10;
-            console.log('theorical cookable :'+maxRainbowTheoricalCookable);
+            var maxRainbowTheoricalCookable = scope.rainbowCooker < scope.rainbowFactoryNbr / 10.0 ? scope.rainbowCooker : scope.rainbowFactoryNbr * 10;
+            console.log('theorical cookable :' + maxRainbowTheoricalCookable);
             var maxColorValue = 0;
-            for (var color in scope.colors){
+            for (var color in scope.colors) {
                 if (scope.colors[color].quantity > maxColorValue)
                     maxColorValue = scope.colors[color].quantity;
             }
-            console.log('max color value :'+maxColorValue);
+            console.log('max color value :' + maxColorValue);
             var maxEffectiveRainbowCookable = Math.floor(maxColorValue / 100);
-            console.log('max effective cookable :'+maxEffectiveRainbowCookable);
+            console.log('max effective cookable :' + maxEffectiveRainbowCookable);
             var rainbowToCook = maxEffectiveRainbowCookable > maxRainbowTheoricalCookable ? maxRainbowTheoricalCookable : maxEffectiveRainbowCookable;
             console.log('cooking : ' + rainbowToCook);
             //balance materials
-            for (var color in scope.colors){
-                scope.colors[color].quantity -= rainbowToCook*100;
-                console.log('new color value:'+scope.colors[color].quantity);
+            for (var color in scope.colors) {
+                scope.colors[color].quantity -= rainbowToCook * 100;
+                console.log('new color value:' + scope.colors[color].quantity);
             }
             scope.rainbow += rainbowToCook;
-            console.log('RAINBOW' +scope.rainbow);
-            
+            console.log('RAINBOW' + scope.rainbow);
+
             //console.log('nbrCloud :'+scope.cloud);
             var that = this;
-            timeout(function(){
+            timeout(function() {
                 scope._generateCloud();
             }, 1000, true);
         };
         //Initialisation of it
         scope._generateCloud();
         //Action for modfication cloud Rate (-/+ capable)
-        var _modulRateCloudPerSecond = function(modulation){
-            scope.rawCloudPerSecond+=parseInt(modulation);
-        }; 
-        
+        var _modulRateCloudPerSecond = function(modulation) {
+            scope.rawCloudPerSecond += parseInt(modulation);
+        };
+
         //Action Meteo
-        scope.addMeteoPegaze = function(){
-            var cost = 35*scope.pegazeMeteo;
-            if(scope.cloud < cost){
+        scope.addMeteoPegaze = function() {
+            var cost = 35 * scope.pegazeMeteo;
+            if (scope.cloud < cost) {
                 return false;
             }
-            scope.cloud-=cost;
+            scope.cloud -= cost;
             scope.pegazeMeteo++;
-            _modulRateCloudPerSecond(10*scope.modificateurMeteo);
+            _modulRateCloudPerSecond(10 * scope.modificateurMeteo);
         };
-        
-        scope.addCloud = function(){
+
+        scope.addCloud = function() {
             scope.cloud++;
         }
-        
+
         //Colors declarations
-        scope.colors = [{color:'red', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'orange', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'green', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'yellow', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'blue', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'darkBlue', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'violet', workers:0, factory:0, modificateur:1, quantity:0}];
-        
+        scope.colors = [{color: 'red', workers: 0, factory: 0, modificateur: 1, quantity: 0},
+            {color: 'orange', workers: 0, factory: 0, modificateur: 1, quantity: 0},
+            {color: 'green', workers: 0, factory: 0, modificateur: 1, quantity: 0},
+            {color: 'yellow', workers: 0, factory: 0, modificateur: 1, quantity: 0},
+            {color: 'blue', workers: 0, factory: 0, modificateur: 1, quantity: 0},
+            {color: 'darkBlue', workers: 0, factory: 0, modificateur: 1, quantity: 0},
+            {color: 'violet', workers: 0, factory: 0, modificateur: 1, quantity: 0}];
+
         //Color Actions
-        scope.addFactory = function(colorName){
+        scope.addFactory = function(colorName) {
             var color = _getColor(colorName);
-            var additionalConso = 100*color.workers;
-            var cost = 1000*color.factory;
-            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost){
+            var additionalConso = 100 * color.workers;
+            var cost = 1000 * color.factory;
+            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost) {
                 return false;
             } else {
                 color.factory++;
-                scope.cloud-=cost;
+                scope.cloud -= cost;
                 scope.consoCloudPerSecond = additionalConso;
                 return true;
             }
         };
-        
-        scope.addWorker = function(colorName){
+
+        scope.addWorker = function(colorName) {
             var color = _getColor(colorName);
-            var additionalConso = 100*color.factory;
-            var cost = 1000*color.workers;
-            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost){
+            var additionalConso = 100 * color.factory;
+            var cost = 1000 * color.workers;
+            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost) {
                 return false;
             } else {
-                scope.cloud-=cost;
+                scope.cloud -= cost;
                 color.workers++;
                 scope.consoCloudPerSecond = additionalConso;
                 return true;
             }
-        };  
-        
-        var _getColor = function(color){
-            switch(color){
-                case 'red': 
+        };
+
+        var _getColor = function(color) {
+            switch (color) {
+                case 'red':
                     return 0;
                     break;
                 case 'orange':
@@ -220,33 +244,33 @@ angular.module('PoneyLand.controllers').
                     return 6;
                     break;
                 default:
-                    return -1;    
+                    return -1;
             }
         };
-       
-       //RainBowAction
-       scope.addRainbow = function(){
-           scope.rainbow++;
-       };
-       
-       scope.addRainbowFactory = function(){
-           var cost =10000*scope.rainbowFactoryNbr;
-           if (scope.cloud < cost){
+
+        //RainBowAction
+        scope.addRainbow = function() {
+            scope.rainbow++;
+        };
+
+        scope.addRainbowFactory = function() {
+            var cost = 10000 * scope.rainbowFactoryNbr;
+            if (scope.cloud < cost) {
                 return false;
-           } else {
-               scope.rainbowFactoryNbr++;
-               scope.cloud-=cost;
-           }
-       };
-       
-       scope.addRainbowCooker = function(){
-           var cost = 1000*scope.rainbowCooker;
-           if (scope.cloud < cost){
-               return false;
-           } else {
-               scope.cloud-=cost;
-               scope.rainbowCooker++;
-           }
-       
-       };
-}]);
+            } else {
+                scope.rainbowFactoryNbr++;
+                scope.cloud -= cost;
+            }
+        };
+
+        scope.addRainbowCooker = function() {
+            var cost = 1000 * scope.rainbowCooker;
+            if (scope.cloud < cost) {
+                return false;
+            } else {
+                scope.cloud -= cost;
+                scope.rainbowCooker++;
+            }
+
+        };
+    }]);
