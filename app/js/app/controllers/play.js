@@ -181,7 +181,11 @@ angular.module('PoneyLand.controllers').
         scope.addCloud = function() {
             scope.cloud++;
         }
-
+        
+        scope.getCloudPopingValue = function(){
+            return 2;
+        }
+        
         //Colors declarations
         scope.colors = [{color: 'red', workers: 0, factory: 0, modificateur: 1, quantity: 0},
             {color: 'orange', workers: 0, factory: 0, modificateur: 1, quantity: 0},
