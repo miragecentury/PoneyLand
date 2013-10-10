@@ -89,29 +89,26 @@ angular.module('PoneyLand.controllers').
         scope.cloud = 0;
         scope.rawCloudPerSecond = 0;
         scope.consoCloudPerSecond = 0;
-        //Colors declarations
-        scope.colors = [{color:'red', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'orange', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'green', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'yellow', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'blue', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'darkBlue', workers:0, factory:0, modificateur:1, quantity:0},
-            {color:'violet', workers:0, factory:0, modificateur:1, quantity:0}];
+        scope.pegazeMeteo = 0;
+        scope.modificateurMeteo = 1;  
+        scope.rainbow = 0;
+        scope.rainbowFactoryNbr = 0;
+        scope.rainbowCooker = 0;
         
         //Cloud Générator
         scope._generateCloud = function(){
             //Definition de la genration de nuage seche
             var cloudPerSecond = scope.rawCloudPerSecond - scope.consoCloudPerSecond;
-            console.log('CloudPerSecond : '+cloudPerSecond);
+            //console.log('CloudPerSecond : '+cloudPerSecond);
             for (var index in scope.colors){
                 var color = scope.colors[index];
                 color.quantity += parseInt(color.workers*color.factory*color.modificateur);
-                console.log('Color : '+ color.color);
-                console.log(color);
+                //console.log('Color : '+ color.color);
+                //console.log(color);
             }   
             //Calcul final du nombre de cloud
             scope.cloud+=parseInt(cloudPerSecond);
-            console.log('nbrCloud :'+scope.cloud);
+            //console.log('nbrCloud :'+scope.cloud);
             var that = this;
             timeout(function(){
                 scope._generateCloud();
@@ -124,23 +121,40 @@ angular.module('PoneyLand.controllers').
             scope.rawCloudPerSecond+=parseInt(modulation);
         }; 
         
-        scope.pegazeMeteo = 0;
-        scope.modificateurMeteo = 1;
-       
         //Action Meteo
         scope.addMeteoPegaze = function(){
+            var cost = 35*scope.pegazeMeteo;
+            if(scope.cloud < cost){
+                return false;
+            }
+            scope.cloud-=cost;
             scope.pegazeMeteo++;
             _modulRateCloudPerSecond(10*scope.modificateurMeteo);
         };
+        
+        scope.addCloud = function(){
+            scope.cloud++;
+        }
+        
+        //Colors declarations
+        scope.colors = [{color:'red', workers:0, factory:0, modificateur:1, quantity:0},
+            {color:'orange', workers:0, factory:0, modificateur:1, quantity:0},
+            {color:'green', workers:0, factory:0, modificateur:1, quantity:0},
+            {color:'yellow', workers:0, factory:0, modificateur:1, quantity:0},
+            {color:'blue', workers:0, factory:0, modificateur:1, quantity:0},
+            {color:'darkBlue', workers:0, factory:0, modificateur:1, quantity:0},
+            {color:'violet', workers:0, factory:0, modificateur:1, quantity:0}];
         
         //Color Actions
         scope.addFactory = function(colorName){
             var color = _getColor(colorName);
             var additionalConso = 100*color.workers;
-            if (scope.rawCloudPerSecond <= additionalConso){
+            var cost = 1000*color.factory;
+            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost){
                 return false;
             } else {
                 color.factory++;
+                scope.cloud-=cost;
                 scope.consoCloudPerSecond = additionalConso;
                 return true;
             }
@@ -149,10 +163,12 @@ angular.module('PoneyLand.controllers').
         scope.addWorker = function(colorName){
             var color = _getColor(colorName);
             var additionalConso = 100*color.factory;
-            if (scope.rawCloudPerSecond <= additionalConso){
+            var cost = 1000*color.workers;
+            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost){
                 return false;
             } else {
-                color.worker++;
+                scope.cloud-=cost;
+                color.workers++;
                 scope.consoCloudPerSecond = additionalConso;
                 return true;
             }
@@ -186,4 +202,29 @@ angular.module('PoneyLand.controllers').
             }
         };
        
+       //RainBowAction
+       scope.addRainbow = function(){
+           scope.rainbow++;
+       };
+       
+       scope.addRainbowFactory = function(){
+           var cost =10000*scope.rainbowFactoryNbr;
+           if (scope.cloud < cost){
+                return false;
+           } else {
+               scope.rainbowFactoryNbr++;
+               scope.cloud-=cost;
+           }
+       };
+       
+       scope.addRainbowCooker = function(){
+           var cost = 1000*scope.rainbowCooker;
+           if (scope.cloud < cost){
+               return false;
+           } else {
+               scope.cloud-=cost;
+               scope.rainbowCooker++;
+           }
+       
+       };
 }]);
