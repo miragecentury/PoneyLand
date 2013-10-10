@@ -6,23 +6,23 @@ angular.module('PoneyLand.controllers').
         $("#rainbowtop").slideUp("slow", function() {
             $('body').css("background-image", "url('img/back.png')");
         });
+        var cpt_toto = 0;
         scope.lstcloud = [];
         var addCloud = function() {
-            scope.lstcloud.push("0");
-            $('#garbageCloud').append("<img class='rainbowcutiemark' ng-click='addCloud()' style='position: absolute;height: 80px; transform-origin: 50% 50%; cursor: pointer;' src='img/cutiemark-min.png' />");
+            scope.lstcloud.push(cpt_toto++);
         };
+
         var delCloud = function() {
-            if ($(".rainbowcutiemark").length > 0) {
-                $(".rainbowcutiemark:first").remove();
+            if (scope.lstcloud.length > 0) {
                 scope.addCloud();
             }
         };
+
         var generate_cutie = function() {
             var cpt_addCloud = scope.getCloudPopingValue();
             for (var i = 0; i < cpt_addCloud; i++) {
-                addCloud();
+                scope.addCloud();
             }
-
             var cpt_peg_cloud = 10 * scope.meteopegase;
             for (var i = 0; i < cpt_peg_cloud; i++) {
                 delCloud();
@@ -32,6 +32,7 @@ angular.module('PoneyLand.controllers').
                 generate_cutie();
             }, 10000, true);
         };
+
         var animate_cutie = function() {
             $(".rainbowcutiemark").animate({
                 transform: "rotate(5deg)",
@@ -115,14 +116,14 @@ angular.module('PoneyLand.controllers').
 //        });
 
 
-        scope.cloud = 0;
+        scope.cloud = 35;
         scope.rawCloudPerSecond = 0;
         scope.consoCloudPerSecond = 0;
         scope.pegazeMeteo = 0;
-        scope.pegazeMeteoCost = function(){
-            return 35*(scope.pegazeMeteo+1);
+        scope.pegazeMeteoCost = function() {
+            return 35 * (scope.pegazeMeteo + 1);
         };
-        scope.modificateurMeteo = 1;  
+        scope.modificateurMeteo = 1;
         scope.rainbow = 0;
         scope.rainbowFactoryNbr = 0;
         scope.rainbowCooker = 0;
@@ -177,7 +178,7 @@ angular.module('PoneyLand.controllers').
 
         //Action Meteo
         scope.addMeteoPegaze = function() {
-            var cost = 35 * scope.pegazeMeteo;
+            var cost = 35 * (scope.pegazeMeteo + 1);
             if (scope.cloud < cost) {
                 return false;
             }
@@ -186,38 +187,42 @@ angular.module('PoneyLand.controllers').
             _modulRateCloudPerSecond(10 * scope.modificateurMeteo);
         };
 
-        scope.addCloud = function($event) {
-            $($event.target).remove();
-            scope.lstcloud.pop();
+        scope.addCloud = function(cl) {
+            if (cl == undefined) {
+                scope.lstcloud.pop();
+            } else {
+                scope.lstcloud.splice(scope.lstcloud.indexOf(cl), 1);
+            }
+            console.log(cl);
             scope.cloud++;
-        }
+        };
 
         scope.getCloudPopingValue = function() {
             return 2;
-        }
+        };
 
         //Colors declarations
-        scope.colors = [{color:'red', workers:0, factory:0, modificateur:1, quantity:0,
-                nextFactoryCloudCost:1000, nextFactoryCloudPerSecondCost:10, nextWorkerCloudCost:1000, nextWorkerCloudCostPerSecound:10},
-            {color:'orange', workers:0, factory:0, modificateur:1, quantity:0,
-                nextFactoryCloudCost:1000, nextFactoryCloudPerSecondCost:10, nextWorkerCloudCost:1000, nextWorkerCloudCostPerSecound:10},
-            {color:'green', workers:0, factory:0, modificateur:1, quantity:0,
-                nextFactoryCloudCost:1000, nextFactoryCloudPerSecondCost:10, nextWorkerCloudCost:1000, nextWorkerCloudCostPerSecound:10},
-            {color:'yellow', workers:0, factory:0, modificateur:1, quantity:0,
-                nextFactoryCloudCost:1000, nextFactoryCloudPerSecondCost:10, nextWorkerCloudCost:1000, nextWorkerCloudCostPerSecound:10},
-            {color:'blue', workers:0, factory:0, modificateur:1, quantity:0, 
-                nextFactoryCloudCost:1000, nextFactoryCloudPerSecondCost:10, nextWorkerCloudCost:1000, nextWorkerCloudCostPerSecound:10},
-            {color:'darkBlue', workers:0, factory:0, modificateur:1, quantity:0,
-                nextFactoryCloudCost:1000, nextFactoryCloudPerSecondCost:10, nextWorkerCloudCost:1000, nextWorkerCloudCostPerSecound:10},
-            {color:'violet', workers:0, factory:0, modificateur:1, quantity:0, 
-                nextFactoryCloudCost:1000, nextFactoryCloudPerSecondCost:10, nextWorkerCloudCost:1000, nextWorkerCloudCostPerSecound:10}];
-        
+        scope.colors = [{color: 'red', workers: 0, factory: 0, modificateur: 1, quantity: 0,
+                nextFactoryCloudCost: 1000, nextFactoryCloudPerSecondCost: 10, nextWorkerCloudCost: 1000, nextWorkerCloudCostPerSecound: 10},
+            {color: 'orange', workers: 0, factory: 0, modificateur: 1, quantity: 0,
+                nextFactoryCloudCost: 1000, nextFactoryCloudPerSecondCost: 10, nextWorkerCloudCost: 1000, nextWorkerCloudCostPerSecound: 10},
+            {color: 'green', workers: 0, factory: 0, modificateur: 1, quantity: 0,
+                nextFactoryCloudCost: 1000, nextFactoryCloudPerSecondCost: 10, nextWorkerCloudCost: 1000, nextWorkerCloudCostPerSecound: 10},
+            {color: 'yellow', workers: 0, factory: 0, modificateur: 1, quantity: 0,
+                nextFactoryCloudCost: 1000, nextFactoryCloudPerSecondCost: 10, nextWorkerCloudCost: 1000, nextWorkerCloudCostPerSecound: 10},
+            {color: 'blue', workers: 0, factory: 0, modificateur: 1, quantity: 0,
+                nextFactoryCloudCost: 1000, nextFactoryCloudPerSecondCost: 10, nextWorkerCloudCost: 1000, nextWorkerCloudCostPerSecound: 10},
+            {color: 'darkBlue', workers: 0, factory: 0, modificateur: 1, quantity: 0,
+                nextFactoryCloudCost: 1000, nextFactoryCloudPerSecondCost: 10, nextWorkerCloudCost: 1000, nextWorkerCloudCostPerSecound: 10},
+            {color: 'violet', workers: 0, factory: 0, modificateur: 1, quantity: 0,
+                nextFactoryCloudCost: 1000, nextFactoryCloudPerSecondCost: 10, nextWorkerCloudCost: 1000, nextWorkerCloudCostPerSecound: 10}];
+
         //Color Actions
         scope.addFactory = function(colorName) {
             var color = _getColor(colorName);
-            var additionalConso = 10*color.workers;
-            var cost = 1000*color.factory;
-            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost){
+            var additionalConso = 10 * color.workers;
+            var cost = 1000 * color.factory;
+            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost) {
                 return false;
             } else {
                 color.factory++;
@@ -230,9 +235,9 @@ angular.module('PoneyLand.controllers').
 
         scope.addWorker = function(colorName) {
             var color = _getColor(colorName);
-            var additionalConso = 10*color.factory;
-            var cost = 1000*color.workers;
-            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost){
+            var additionalConso = 10 * color.factory;
+            var cost = 1000 * color.workers;
+            if (scope.rawCloudPerSecond < additionalConso || scope.cloud < cost) {
                 return false;
             } else {
                 scope.cloud -= cost;
@@ -241,21 +246,21 @@ angular.module('PoneyLand.controllers').
                 scope._updateCostOfFactory(color);
                 return true;
             }
-        }; 
-        
-        scope._updateCostOfFactory = function(color){
+        };
+
+        scope._updateCostOfFactory = function(color) {
             //update workers costs
-            color.nextWorkerCloudCost = 1000*color.workers;
-            color.nextWorkerCloudCostPerSecound = 10*color.factory;
-            
+            color.nextWorkerCloudCost = 1000 * color.workers;
+            color.nextWorkerCloudCostPerSecound = 10 * color.factory;
+
             //update factory costs
-            color.nextFactoryCloudCost = 1000*color.factory;
-            color.nextFactoryCloudPerSecondCost = 10*colors.workers ;
-        }
-        
-        var _getColor = function(color){
-            switch(color){
-                case 'red': 
+            color.nextFactoryCloudCost = 1000 * color.factory;
+            color.nextFactoryCloudPerSecondCost = 10 * colors.workers;
+        };
+
+        var _getColor = function(color) {
+            switch (color) {
+                case 'red':
                     return 0;
                     break;
                 case 'orange':
