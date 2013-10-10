@@ -9,10 +9,12 @@
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-
+        <link rel="stylesheet" href="css/toastr.css">
+        
         <!-- Latest compiled and minified JavaScript -->
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/toastr.js"></script>
     </head>
     <body class="container">
         <div class="row">
@@ -36,22 +38,25 @@
                 </div>
             </nav>
         </div>
-        <div class="row">
-            <div ng-view></div>
+        <div style=''>
         </div>
-        <div class="row">
-            <div>AngularJS: v<span app-version></span></div>
-        </div>
-        <!-- In production use:
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-        -->
-        <script src="lib/angular/angular.js"></script>
-        <!-- -->
-        <script src="js/app/app.js"></script>
-        <script src="js/app/services.js"></script>
-        <script src="js/app/controllers/main.js"></script>
-        <script src="js/app/controllers/play.js"></script>
-        <script src="js/app/filters.js"></script>
-        <script src="js/app/directives.js"></script>
-    </body>
+    </div>
+    <div class="row">
+        <div ng-view></div>
+    </div>
+    <div class="row">
+        <div>AngularJS: v<span app-version></span></div>
+    </div>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    -->
+    <script src="lib/angular/angular.js"></script>
+    <!-- -->
+    <script src="js/app/app.js"></script>
+    <script src="js/app/services.js"></script>
+    <script src="js/app/controllers/main.js"></script>
+    <script src="js/app/controllers/play.js"></script>
+    <script src="js/app/filters.js"></script>
+    <script src="js/app/directives.js"></script>
+</body>
 </html>

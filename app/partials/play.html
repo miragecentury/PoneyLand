@@ -1,49 +1,140 @@
 <div class="col-md-12">
+    <div class="row"  style='height: 200px;'>
+        <div class="col-md-12" style='padding-top: 50px;'>
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+        </div>
+    </div>
     <div class="row">
-        <div class='col-md-offset-1 col-md-1'>
-        </div>
-        <div class='col-md-1'>
-        </div>
-        <div class='col-md-1'>
-        </div>
-        <div class='col-md-1'>
-        </div>
-        <div class='col-md-1'>
-        </div>
-        <div class='col-md-1'>
-        </div>
-        <div class='col-md-1'>
-        </div>
-        <div class='col-md-offset-1 col-md-3'>
-            <div style="text-align: right; padding-top: 100px; padding-right: 40px;background-image: url('img/rainbow_cpt.jpg');background-size: 100%  ;height: 150px; background-repeat: no-repeat;">
-                <div style='' class='label label-success' style=''>1.000.000.000.000.000.000.000</div>
+        <div class="col-md-2" style='text-align: center;'>
+            <div class='row'>
+                <img src='img/pony.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-warning' style='font-size: 16px;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
-
+        <div class="col-md-10" style='height: 160px;'>
+        </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <img class="rainbowcutiemark" style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+    <div class="row" style='text-align: center;'>
+        <div class="col-md-2" style='text-align: center;'>
+            <div class='row'>
+                <img style='height: 80px;' src='img/cutiemark.png'>
+            </div>
+            <div class='row' style='margin-top: 5px;'>
+                <span class='label label-default' style='font-size: 16px;'>Cloud: {{cloud}}</span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class='row'>
+                <img src='img/factory_red.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-danger' style='font-size: 16px;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class='row'>
+                <img src='img/factory_orange.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-warning' style='font-size: 16px;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class='row'>
+                <img src='img/factory_yellow.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-default' style='font-size: 16px;background-color: #E9F031;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class='row'>
+                <img src='img/factory_green.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-success' style='font-size: 16px;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class='row'>
+                <img src='img/factory_blue.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-info' style='font-size: 16px;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class='row'>
+                <img src='img/factory_darkblue.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-primary' style='font-size: 16px;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class='row'>
+                <img src='img/factory_violet.png' style='height: 80px;'><br>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <span class='label label-default' style='font-size: 16px;background-color: #9D2DB9;'>0</span>
+            </div>
+            <div class='row' style='margin-top:5px;'>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            X
+        <div class="col-md-offset-1 col-md-1">
+            Rouge
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            X
+        <div class="col-md-1">
+            Orange
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            X
+        <div class="col-md-1">
+            Jaune
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            X
+        <div class="col-md-1">
+            Vert
+        </div>
+        <div class="col-md-1">
+            Bleu
+        </div>
+        <div class="col-md-1">
+            Bleu foncé
+        </div>
+        <div class="col-md-1">
+            Violet
+        </div>
+        <div class='col-md-3'>
+            <div class='scoreRainbow' style="text-align: right; padding-top: 100px; padding-right: 40px;background-image: url('img/rainbow_cpt.png');background-size: 100%  ;height: 150px; background-repeat: no-repeat;">
+                <div style='' class='label label-success' style=''>0</div>
+            </div>
         </div>
     </div>
 </div>

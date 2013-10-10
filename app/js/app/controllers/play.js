@@ -12,8 +12,6 @@ angular.module('PoneyLand.controllers').
             }, {
                 duration: 360,
                 step: function(now, fx) {
-                    //console.log(fx.elem);
-                    //console.log(fx);
                     var it = $(fx.elem).attr('itera');
                     var x = $(fx.elem).attr('x');
                     var y = $(fx.elem).attr('y');
@@ -21,22 +19,33 @@ angular.module('PoneyLand.controllers').
                     var sens = $(fx.elem).attr('sens');
                     var r = Math.random();
                     var width = $("body").width()-($("body").width() - $('.container').width());
+                    var min_x = $(fx.elem).attr('min_x');
+                    var max_x = $(fx.elem).attr('max_x');
+                    var delta_x = $(fx.elem).attr('delta_x');
+                    //Init & Fix Speed
                     if(speed == undefined){
-                        speed = ((Math.random()+1)*10)/(Math.random()*10);
+                        delta_x = Math.random()*20;
+                        speed = ((Math.random()+1)*9)/5;
                         //console.log(speed);
                     }else{
+                        delta_x = parseInt(delta_x);
                         speed = parseInt(speed);
                     };  
+                    
+                    //Init & Fix x
                     if (x == undefined) {
                         x = 0;
                     } else {
                         x = parseInt(x);
                     }
+                    //Init & Fix sens
                     if (sens != "false") {
                         sens = true;
                     } else {
                         sens = false;
                     }
+                    
+                    //Changement de ses
                     if (x > width)
                     {
                         sens = false;
@@ -45,13 +54,18 @@ angular.module('PoneyLand.controllers').
                         sens = true;
                         x = 0;
                     }
+                    
+                    //Déplacement sur X
                     if (sens) {
                         x = x + speed;
                     }else{
                         x = x - speed;
                     }
-                    y = Math.cos(x / 30) * 30;
-                    it = 10;
+                    //Déplacement sur Y
+                    y = Math.cos((x+delta_x) / 30) * 50;
+                    
+                    it = 0;
+                    $(fx.elem).attr('delta_x',delta_x)
                     $(fx.elem).attr('speed',speed);
                     $(fx.elem).attr('itera', it);
                     $(fx.elem).attr('x', x);
@@ -67,6 +81,11 @@ angular.module('PoneyLand.controllers').
             }, 360, true);
         };
         animate_cutie();
+        $(".rainbowcutiemark").click(function(e){
+            $(e.target).remove();
+        });
+        
+        
         scope.cloud = 0;
         scope.rawCloudPerSecond = 0;
         scope.consoCloudPerSecond = 0;
@@ -89,7 +108,7 @@ angular.module('PoneyLand.controllers').
             }   
             //Calcul final du nombre de cloud
             scope.cloud+=parseInt(cloudPerSecond);
-            
+            console.log(scope.cloud);
             //calcul RainBow
             var maxRainbowTheoricalCookable = scope.rainbowCooker < scope.rainbowFactoryNbr/10.0 ? scope.rainbowCooker : scope.rainbowFactoryNbr*10;
             console.log('theorical cookable :'+maxRainbowTheoricalCookable);
