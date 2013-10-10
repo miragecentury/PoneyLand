@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr" ng-app="PoneyLand">
+    <head>
+        <meta charset="utf-8">
+        <title>RainBow Factory</title>
+        <link rel="stylesheet" href="css/app.css"/>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body class="container">
+        <div class="row">
+            <img style="display: none; text-align: center;" id="rainbowtop" src="img/rainbowtop.gif">
+        </div>
+        <div class="row">
+            <nav class="navbar navbar-default" role="navigation" style="background-image: linear-gradient(to bottom,#fff 0,#9EDBF9 50%);">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" href="#/" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#" style="color:white;">RainBow Factory</a>
+                    <span class="navbar-text"><span class="label label-primary">Score : 0</span></span>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex5-collapse navbar-right">
+                    <a type="button" href="#/play" class="btn btn-default navbar-btn btn-primary">Jouer</a>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div ng-view></div>
+        </div>
+        <div class="row">
+            <div>AngularJS: v<span app-version></span></div>
+        </div>
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+        -->
+        <script src="lib/angular/angular.js"></script>
+        <!-- -->
+        <script src="js/app/app.js"></script>
+        <script src="js/app/services.js"></script>
+        <script src="js/app/controllers/main.js"></script>
+        <script src="js/app/controllers/play.js"></script>
+        <script src="js/app/filters.js"></script>
+        <script src="js/app/directives.js"></script>
+    </body>
+</html>
