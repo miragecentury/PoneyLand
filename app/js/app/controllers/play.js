@@ -20,6 +20,7 @@ angular.module('PoneyLand.controllers').
             blank: {
                 title: "",
                 img: "",
+                duree: 60, 
                 cloudPopMultipicateur: 1,
                 cloudPopAddition: 1,
                 pegazeMultiplicateur: 1,
@@ -58,12 +59,17 @@ angular.module('PoneyLand.controllers').
                 }
             }
         };
-        
+
+        var eventList = [];
+
+        var eventmanager = function() {
+
+        };
 
         scope.arc = 0;
 
         scope.cloudRaw = 0;
-        scope.cloudRecolte = 133;
+        scope.cloudRecolte = 0;
         scope.cloudPopMultiplicateur = 1;
         scope.cloudPopAddition = 0;
         scope.cloudPopBySec = function() {
