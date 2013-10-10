@@ -12,8 +12,6 @@ angular.module('PoneyLand.controllers').
             }, {
                 duration: 360,
                 step: function(now, fx) {
-                    //console.log(fx.elem);
-                    //console.log(fx);
                     var it = $(fx.elem).attr('itera');
                     var x = $(fx.elem).attr('x');
                     var y = $(fx.elem).attr('y');
@@ -21,22 +19,27 @@ angular.module('PoneyLand.controllers').
                     var sens = $(fx.elem).attr('sens');
                     var r = Math.random();
                     var width = $("body").width()-($("body").width() - $('.container').width());
+                    //Init & Fix Speed
                     if(speed == undefined){
-                        speed = ((Math.random()+1)*10)/(Math.random()*10);
+                        speed = ((Math.random()+1)*9)/(Math.random()*10);
                         //console.log(speed);
                     }else{
                         speed = parseInt(speed);
                     };  
+                    //Init & Fix x
                     if (x == undefined) {
                         x = 0;
                     } else {
                         x = parseInt(x);
                     }
+                    //Init & Fix sens
                     if (sens != "false") {
                         sens = true;
                     } else {
                         sens = false;
                     }
+                    
+                    //Changement de ses
                     if (x > width)
                     {
                         sens = false;
@@ -45,13 +48,17 @@ angular.module('PoneyLand.controllers').
                         sens = true;
                         x = 0;
                     }
+                    
+                    //Déplacement sur X
                     if (sens) {
                         x = x + speed;
                     }else{
                         x = x - speed;
                     }
-                    y = Math.cos(x / 30) * 30;
-                    it = 10;
+                    //Déplacement sur Y
+                    y = Math.cos(x / 30) * 50;
+                    
+                    it = 0;
                     $(fx.elem).attr('speed',speed);
                     $(fx.elem).attr('itera', it);
                     $(fx.elem).attr('x', x);
@@ -67,6 +74,11 @@ angular.module('PoneyLand.controllers').
             }, 360, true);
         };
         animate_cutie();
+        $(".rainbowcutiemark").click(function(e){
+            $(e.target).remove();
+        });
+        
+        
         scope.cloud = 0;
         scope.rawCloudPerSecond = 0;
         scope.consoCloudPerSecond = 0;
