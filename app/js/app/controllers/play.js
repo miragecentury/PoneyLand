@@ -19,13 +19,19 @@ angular.module('PoneyLand.controllers').
                     var sens = $(fx.elem).attr('sens');
                     var r = Math.random();
                     var width = $("body").width()-($("body").width() - $('.container').width());
+                    var min_x = $(fx.elem).attr('min_x');
+                    var max_x = $(fx.elem).attr('max_x');
+                    var delta_x = $(fx.elem).attr('delta_x');
                     //Init & Fix Speed
                     if(speed == undefined){
-                        speed = ((Math.random()+1)*9)/(Math.random()*10);
+                        delta_x = Math.random()*20;
+                        speed = ((Math.random()+1)*9)/5;
                         //console.log(speed);
                     }else{
+                        delta_x = parseInt(delta_x);
                         speed = parseInt(speed);
                     };  
+                    
                     //Init & Fix x
                     if (x == undefined) {
                         x = 0;
@@ -56,9 +62,10 @@ angular.module('PoneyLand.controllers').
                         x = x - speed;
                     }
                     //Déplacement sur Y
-                    y = Math.cos(x / 30) * 50;
+                    y = Math.cos((x+delta_x) / 30) * 50;
                     
                     it = 0;
+                    $(fx.elem).attr('delta_x',delta_x)
                     $(fx.elem).attr('speed',speed);
                     $(fx.elem).attr('itera', it);
                     $(fx.elem).attr('x', x);
