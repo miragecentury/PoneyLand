@@ -1,50 +1,47 @@
 <div class="col-md-12">
-    <div class="row"  style='height: 200px;'>
-        <div id='garbageCloud' class="col-md-12" style='padding-top: 50px;-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;'>
-            <img ng-repeat='cl in lstcloud' onclick="" class="rainbowcutiemark" ng-click='addCloud(cl)' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+    <div class="row"  style='height: 200px;-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;'>
+        <div class='col-md-2' style='text-align: center;'>
+            <div class='row' >
+                <img style='height: 80px;' src='img/cutiemark.png'>
+            </div>
+            <div class='row' style='margin-top: 5px;'>
+                <span class='label label-default' style='font-size: 16px;'>{{cloudRaw}}</span>
+            </div>
+        </div>
+        <div id='garbageCloud' class="col-md-10" style='padding-top: 50px;'>
+            <img ng-repeat='cl in lstcloud' onclick="" class="rainbowcutiemark" ng-click='addCloudRecolter(cl)' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
         </div>
     </div>
-    <div class="row">
+    <hr>
+    <div class="row" style='text-align: center;'>
         <div class="col-md-2" style='text-align: center;'>
             <div class='row'>
                 <img src='img/pony.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-warning' style='font-size: 16px;'>{{pegazeMeteo}}</span>
+                <span class='label label-warning' style='font-size: 16px;'>{{pegaze}}</span><span class="help-block">+2/s cloudRaw</span>
             </div>
-            <div class='row' style='margin-top:5px;'>
-                <button ng-click='addMeteoPegaze()' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>{{pegazeMeteoCost()}}</span> </button>
-            </div>
-        </div>
-        <div class="col-md-10" style='height: 160px;'>
-        </div>
-    </div>
-    <div class="row" style='text-align: center;'>
-        <div class="col-md-1" style='text-align: center;'>
-            <div class='row'>
-                <img style='height: 80px;' src='img/cutiemark.png'>
-            </div>
-            <div class='row' style='margin-top: 5px;'>
-                <span class='label label-default' style='font-size: 16px;'>{{cloud}}</span>
+            <div class='row' style=''>
+                <div ng-if='cloudRecolte >= nextPegazeCost()'>
+                    <button  ng-click='buyPegaze()' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{nextPegazeCost()}}</span> </button>
+                </div>
             </div>
         </div>
-        <div class='col-md-1'>
-            W</br>
-            O</br>
-            R</br>
-            K</br>
-            E</br>
-            R
+        <div class='col-md-2'>
+            <div class='alert alert-info'>
+                <span>Emplacement d'Ouvrier Disponible</span><br/>
+                <span class='label label-default'>{{factory.nbworker}}/{{factory.nbFactoryNumberPlace()}}</span>
+            </div>
         </div>
         <div class="col-md-1">
             <div class='row'>
                 <img src='img/factory_red.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-danger' style='font-size: 16px;'>0</span>
+                <span class='label label-danger' style='font-size: 16px;'>{{factory.red.nbworker}}</span><span class="help-block">+2000/cld/s Arc</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+                <button ng-click='factory.buyWorker(factory.red)' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceWorker(factory.red)}}</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -52,10 +49,10 @@
                 <img src='img/factory_orange.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-warning' style='font-size: 16px;'>0</span>
+                <span class='label label-warning' style='font-size: 16px;'>{{factory.orange.nbworker}}</span><span class="help-block">+1000/cld/s Arc</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+                <button ng-click='factory.buyWorker(factory.orange)' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceWorker(factory.orange)}}</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -63,10 +60,10 @@
                 <img src='img/factory_yellow.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-default' style='font-size: 16px;background-color: #E9F031;'>0</span>
+                <span class='label label-default' style='font-size: 16px;background-color: #E9F031;'>{{factory.yellow.nbworker}}</span><span class="help-block">+500/cld/s  Arc</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+                <button ng-click='factory.buyWorker(factory.yellow)' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceWorker(factory.yellow)}}</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -74,10 +71,10 @@
                 <img src='img/factory_green.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-success' style='font-size: 16px;'>0</span>
+                <span class='label label-success' style='font-size: 16px;'>{{factory.green.nbworker}}</span><span class="help-block">+250/cld/s Arc</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+                <button ng-click='factory.buyWorker(factory.green)' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceWorker(factory.green)}}</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -85,10 +82,10 @@
                 <img src='img/factory_blue.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-info' style='font-size: 16px;'>0</span>
+                <span class='label label-info' style='font-size: 16px;'>{{factory.blue.nbworker}}</span><span class="help-block">+100/cld/s Arc</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+                <button ng-click='factory.buyWorker(factory.blue)' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceWorker(factory.blue)}}</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -96,10 +93,10 @@
                 <img src='img/factory_darkblue.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-primary' style='font-size: 16px;'>0</span>
+                <span class='label label-primary' style='font-size: 16px;'>{{factory.darkblue.nbworker}}</span><span class="help-block">+50/cld/s Arc</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+                <button ng-click='factory.buyWorker(factory.darkblue)' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceWorker(factory.darkblue)}}</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -107,38 +104,38 @@
                 <img src='img/factory_violet.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-default' style='font-size: 16px;background-color: #9D2DB9;'>0</span>
+                <span class='label label-default' style='font-size: 16px;background-color: #9D2DB9;'>{{factory.violet.nbworker}}</span><span class="help-block">+20/cld/s Arc</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
+                <button ng-click='factory.buyWorker(factory.violet)' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceWorker(factory.violet)}}</span> </button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style='text-align: center; margin-top: 20px;'>
+        <div class="col-md-2" style='text-align: center;'>
+            <div class='row'>
+                <img style='height: 80px;' src='img/cutiemark.png'>
+            </div>
+            <div class='row' style='margin-top: 5px;'>
+                <span class='label label-default' style='font-size: 16px;'>{{cloudRecolte}}</span>
+            </div>
+        </div>
+        <div class='col-md-2'>
+            <div class='row'>
+                Factory
+            </div>
+            <div class='row'>
+                <span class='label label-default' style='font-size: 16px;'>{{factory.nbfactory}}</span>
+            </div>
+            <div class='row'>
+                <button ng-click='factory.buyFactory()' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceFactory()}}</span> </button> 
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-1 col-md-1">
-            Rouge
-        </div>
-        <div class="col-md-1">
-            Orange
-        </div>
-        <div class="col-md-1">
-            Jaune
-        </div>
-        <div class="col-md-1">
-            Vert
-        </div>
-        <div class="col-md-1">
-            Bleu
-        </div>
-        <div class="col-md-1">
-            Bleu foncé
-        </div>
-        <div class="col-md-1">
-            Violet
-        </div>
-        <div class='col-md-3'>
+        <div class='col-md-offset-9 col-md-3'>
             <div class='scoreRainbow' style="text-align: right; padding-top: 100px; padding-right: 40px;background-image: url('img/rainbow_cpt.png');background-size: 100%  ;height: 150px; background-repeat: no-repeat;">
-                <div style='' class='label label-success' style=''>0</div>
+                <div style='' class='label label-success' style='font-size: 18px;'>{{arc}}</div>
             </div>
         </div>
     </div>
