@@ -9,8 +9,9 @@ angular.module('PoneyLand.controllers').
         });
         $(".rainbowcutiemark").animate({
         }, {
-            step: function(now,fx){
-                
+            step: function(now, fx) {
+                console.log(now);
+                console.log(fx);
             }
         });
 
