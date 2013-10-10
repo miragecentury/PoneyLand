@@ -108,6 +108,28 @@ angular.module('PoneyLand.controllers').
             }   
             //Calcul final du nombre de cloud
             scope.cloud+=parseInt(cloudPerSecond);
+            
+            //calcul RainBow
+            var maxRainbowTheoricalCookable = scope.rainbowCooker < scope.rainbowFactoryNbr/10.0 ? scope.rainbowCooker : scope.rainbowFactoryNbr*10;
+            console.log('theorical cookable :'+maxRainbowTheoricalCookable);
+            var maxColorValue = 0;
+            for (var color in scope.colors){
+                if (scope.colors[color].quantity > maxColorValue)
+                    maxColorValue = scope.colors[color].quantity;
+            }
+            console.log('max color value :'+maxColorValue);
+            var maxEffectiveRainbowCookable = Math.floor(maxColorValue / 100);
+            console.log('max effective cookable :'+maxEffectiveRainbowCookable);
+            var rainbowToCook = maxEffectiveRainbowCookable > maxRainbowTheoricalCookable ? maxRainbowTheoricalCookable : maxEffectiveRainbowCookable;
+            console.log('cooking : ' + rainbowToCook);
+            //balance materials
+            for (var color in scope.colors){
+                scope.colors[color].quantity -= rainbowToCook*100;
+                console.log('new color value:'+scope.colors[color].quantity);
+            }
+            scope.rainbow += rainbowToCook;
+            console.log('RAINBOW' +scope.rainbow);
+            
             //console.log('nbrCloud :'+scope.cloud);
             var that = this;
             timeout(function(){
