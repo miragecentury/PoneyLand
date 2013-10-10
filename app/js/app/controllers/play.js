@@ -108,7 +108,7 @@ angular.module('PoneyLand.controllers').
             }   
             //Calcul final du nombre de cloud
             scope.cloud+=parseInt(cloudPerSecond);
-            
+            console.log(scope.cloud);
             //calcul RainBow
             var maxRainbowTheoricalCookable = scope.rainbowCooker < scope.rainbowFactoryNbr/10.0 ? scope.rainbowCooker : scope.rainbowFactoryNbr*10;
             console.log('theorical cookable :'+maxRainbowTheoricalCookable);

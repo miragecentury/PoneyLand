@@ -1,10 +1,10 @@
 <div class="col-md-12">
     <div class="row"  style='height: 200px;'>
         <div class="col-md-12" style='padding-top: 50px;'>
-            <img class="rainbowcutiemark" style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
-            <img class="rainbowcutiemark" style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
-            <img class="rainbowcutiemark" style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
-            <img class="rainbowcutiemark" style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img class="rainbowcutiemark" ng-click='addCloud()' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
         </div>
     </div>
     <div class="row">
@@ -16,7 +16,7 @@
                 <span class='label label-warning' style='font-size: 16px;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
         <div class="col-md-10" style='height: 160px;'>
@@ -24,7 +24,12 @@
     </div>
     <div class="row" style='text-align: center;'>
         <div class="col-md-2" style='text-align: center;'>
-
+            <div class='row'>
+                <img style='height: 80px;' src='img/cutiemark.png'>
+            </div>
+            <div class='row' style='margin-top: 5px;'>
+                <span class='label label-default' style='font-size: 16px;'>Cloud: {{cloud}}</span>
+            </div>
         </div>
         <div class="col-md-1">
             <div class='row'>
@@ -34,7 +39,7 @@
                 <span class='label label-danger' style='font-size: 16px;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -45,7 +50,7 @@
                 <span class='label label-warning' style='font-size: 16px;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -53,10 +58,10 @@
                 <img src='img/factory_yellow.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-default' style='font-size: 16px;'>0</span>
+                <span class='label label-default' style='font-size: 16px;background-color: #E9F031;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -67,7 +72,7 @@
                 <span class='label label-success' style='font-size: 16px;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -78,7 +83,7 @@
                 <span class='label label-info' style='font-size: 16px;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -89,7 +94,7 @@
                 <span class='label label-primary' style='font-size: 16px;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
         <div class="col-md-1">
@@ -97,10 +102,10 @@
                 <img src='img/factory_violet.png' style='height: 80px;'><br>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <span class='label label-default' style='font-size: 16px;'>0</span>
+                <span class='label label-default' style='font-size: 16px;background-color: #9D2DB9;'>0</span>
             </div>
             <div class='row' style='margin-top:5px;'>
-                <button class='btn btn-sm'>Acheter : <span>X</span> </button>
+                <button class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> Acheter : <span>X</span> </button>
             </div>
         </div>
     </div>
