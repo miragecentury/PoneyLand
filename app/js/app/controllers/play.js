@@ -14,13 +14,28 @@ angular.module('PoneyLand.controllers').
 
         scope.timer = 0;
         scope.eventActive = false;
-        scope.event = {};
+        scope.event = {
+            tickSeconde: function() {
+                scope.event.tickSeconde();
+                timeout(function() {
+                    scope.event.tickSeconde();
+                }, 1000, true);
+
+            },
+            lauchAnEvent: function() {
+                var random_indice = Math.random() * (eventList.length - 0) + 0;
+                console.log();
+            },
+            launchEvent: function(event) {
+
+            }
+        };
 
         scope.events = {
             blank: {
                 title: "",
                 img: "",
-                duree: 60, 
+                duree: 60,
                 cloudPopMultipicateur: 1,
                 cloudPopAddition: 1,
                 pegazeMultiplicateur: 1,
@@ -148,7 +163,7 @@ angular.module('PoneyLand.controllers').
                 initPrice: 100
             },
             nextPriceWorker: function(factoryColor) {
-                return Math.round(Math.exp(1) + factoryColor.initPrice) - 3;
+                return Math.round(Math.exp((factoryColor.nbworker) + 1) / (factoryColor.nbworker + 1)) * 10 + factoryColor.initPrice - 30;
             },
             nextPriceFactory: function() {
                 return Math.round(Math.exp(((scope.factory.nbfactory - 1) * 20)) / (scope.factory.nbfactory + 1)) + 5000 - 1;
@@ -244,7 +259,7 @@ angular.module('PoneyLand.controllers').
                     var speed = $(fx.elem).attr('speed');
                     var sens = $(fx.elem).attr('sens');
                     var r = Math.random();
-                    var width = $("body").width() - ($("body").width() - $('.container').width());
+                    var width = $('#garbageCloud').width();
                     var min_x = $(fx.elem).attr('min_x');
                     var max_x = $(fx.elem).attr('max_x');
                     var delta_x = $(fx.elem).attr('delta_x');
@@ -332,5 +347,5 @@ angular.module('PoneyLand.controllers').
 
         generateCutie();
         scope.factory.tickSeconde();
-        toastr.info('Attention des événements peuvent arriver!!!')
+        toastr.info('Attention des événements peuvent apparaître!!!')
     }]);

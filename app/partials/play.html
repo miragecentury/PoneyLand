@@ -9,7 +9,7 @@
             </div>
         </div>
         <div id='garbageCloud' class="col-md-10" style='padding-top: 50px;'>
-            <img ng-repeat='cl in lstcloud' onclick="" class="rainbowcutiemark" ng-click='addCloudRecolter(cl)' style="height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
+            <img ng-repeat='cl in lstcloud' onclick="" class="rainbowcutiemark" ng-click='addCloudRecolter(cl)' style="position: absolute;height: 80px; transform-origin: 50% 50%; cursor: pointer;" src="img/cutiemark-min.png" />
         </div>
     </div>
     <hr>
@@ -120,23 +120,26 @@
                 <span class='label label-default' style='font-size: 16px;'>{{cloudRecolte}}</span>
             </div>
         </div>
-        <div class='col-md-2'>
+        <div class='col-md-2' style="text-align: center;">
             <div class='row'>
-                Factory
+                <img src="img/factory_base.png" style="height: 300px;">
             </div>
-            <div class='row'>
+            <div class='row' >
                 <span class='label label-default' style='font-size: 16px;'>{{factory.nbfactory}}</span>
             </div>
-            <div class='row'>
+            <div class='row' style="margin-top: 20px;">
                 <button ng-click='factory.buyFactory()' class='btn btn-sm'><i class='glyphicon glyphicon-plus'></i> <span>{{factory.nextPriceFactory()}}</span> </button> 
+            </div>
+        </div>
+        <div class='col-md-offset-3  col-md-3'>
+            <div class="row" style="margin-top: 40;">
+                <div class='scoreRainbow' style="text-align: right; padding-top: 100px; padding-right: 60px;background-image: url('img/rainbow_cpt.png');background-size: 90%  ;height: 160px; background-repeat: no-repeat;">
+                    <div style='' class='label label-success' style='font-size: 18px;'>{{arc}}</div>
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class='col-md-offset-9 col-md-3'>
-            <div class='scoreRainbow' style="text-align: right; padding-top: 100px; padding-right: 40px;background-image: url('img/rainbow_cpt.png');background-size: 100%  ;height: 150px; background-repeat: no-repeat;">
-                <div style='' class='label label-success' style='font-size: 18px;'>{{arc}}</div>
-            </div>
-        </div>
+
     </div>
 </div>
